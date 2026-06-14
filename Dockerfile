@@ -1,7 +1,7 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-LABEL io.hass.version="1.15" io.hass.type="addon" io.hass.arch="aarch64|amd64"
+LABEL io.hass.version="1.16" io.hass.type="addon" io.hass.arch="aarch64|amd64"
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -13,6 +13,7 @@ RUN apt update \
         cups \
         cups-filters \
         avahi-daemon \
+        avahi-utils \
         libnss-mdns \
         dbus \
         colord \

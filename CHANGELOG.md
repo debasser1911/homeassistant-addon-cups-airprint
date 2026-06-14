@@ -1,3 +1,8 @@
+## v1.16
+
+- Set `publish-addresses=no` in `avahi-daemon.conf` to avoid reverse PTR record conflicts with the host's existing mDNS records for the shared IP address
+- Install `avahi-utils` and use `avahi-publish` in the S6 run script to manually register the A-record for the container hostname without the conflicting reverse PTR record (`--no-reverse`)
+
 ## v1.15
 
 - Add `--debug` flag to `avahi-daemon` startup to print verbose conflict logs for further analysis

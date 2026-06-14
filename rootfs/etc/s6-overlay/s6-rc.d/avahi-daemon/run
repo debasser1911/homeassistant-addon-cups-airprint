@@ -30,6 +30,20 @@ done
 if [ -n "$allow_list" ]; then
   bashio::log.info "Restricting Avahi to interfaces: $allow_list"
   sed -i "s/^[#]*allow-interfaces=.*/allow-interfaces=$allow_list/" /etc/avahi/avahi-daemon.conf
+  
+  # Get primary interface IP address to publish A-record manually
+  primary_interface=$(echo "$allow_list" | cut -d, -f1)
+  ip_addr=$(ip -4 addr show dev "$primary_interface" | awk '/inet / {print $2}' | cut -d/ -f1 | head -n1)
+  if [ -n "$ip_addr" ]; then
+    bashio::log.info "Publishing manual A-record for $(hostname).local -> $ip_addr"
+    (
+      until [ -e /var/run/avahi-daemon/socket ]; do
+        sleep 1s
+      done
+      sleep 2s
+      avahi-publish -a -R "$(hostname).local" "$ip_addr"
+    ) &
+  fi
 else
   bashio::log.warning "No physical network interfaces detected for Avahi!"
 fi
