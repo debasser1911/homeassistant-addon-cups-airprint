@@ -1,3 +1,19 @@
+## v1.11
+
+- Fix Windows carriage returns (CRLF) and execution permissions on S6 overlay daemon scripts to ensure they start and run correctly in the Docker container
+
+## v1.10
+
+- Disable IPv6 support in Avahi daemon configuration
+
+## v1.9
+
+- Update Debian base image version to 9.3.0
+
+## v1.8
+
+- Fix the hostname conflict log spam by whitelisting physical/main network interfaces and ignoring virtual Docker interfaces in avahi-daemon
+
 ## v1.7
 
 - Fix the issue with "ulimit" size and permissions

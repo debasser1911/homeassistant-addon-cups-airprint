@@ -8,4 +8,30 @@ until [ -e /run/dbus/system_bus_socket ]; do
   sleep 1s
 done
 
+# Detect interfaces to allow (excluding loopback and Docker virtual interfaces)
+allow_list=""
+for dev in /sys/class/net/*; do
+  if [ -d "$dev" ]; then
+    name=$(basename "$dev")
+    case "$name" in
+      veth*|docker*|hassio*|lo|br-*)
+        ;;
+      *)
+        if [ -n "$allow_list" ]; then
+          allow_list="$allow_list,$name"
+        else
+          allow_list="$name"
+        fi
+        ;;
+    esac
+  fi
+done
+
+if [ -n "$allow_list" ]; then
+  bashio::log.info "Restricting Avahi to interfaces: $allow_list"
+  sed -i "s/^[#]*allow-interfaces=.*/allow-interfaces=$allow_list/" /etc/avahi/avahi-daemon.conf
+else
+  bashio::log.warning "No physical network interfaces detected for Avahi!"
+fi
+
 avahi-daemon

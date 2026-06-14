@@ -1,7 +1,7 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-LABEL io.hass.version="1.5" io.hass.type="addon" io.hass.arch="aarch64|amd64"
+LABEL io.hass.version="1.11" io.hass.type="addon" io.hass.arch="aarch64|amd64"
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -61,6 +61,10 @@ RUN useradd \
 
 EXPOSE 631
 
-RUN chmod a+x /run.sh
+RUN find /etc/s6-overlay/s6-rc.d/ -type f -exec sed -i 's/\r$//' {} + \
+  && sed -i 's/\r$//' /run.sh \
+  && sed -i 's/\r$//' /etc/avahi/avahi-daemon.conf \
+  && chmod a+x /run.sh \
+  && chmod -R a+x /etc/s6-overlay/s6-rc.d/
 
 CMD ["/run.sh"]
