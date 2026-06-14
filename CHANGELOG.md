@@ -1,3 +1,7 @@
+## v1.17
+
+- Install `iproute2` package to make the `ip` command available in the container
+
 ## v1.16
 
 - Set `publish-addresses=no` in `avahi-daemon.conf` to avoid reverse PTR record conflicts with the host's existing mDNS records for the shared IP address
