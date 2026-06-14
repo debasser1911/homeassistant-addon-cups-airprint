@@ -1,3 +1,7 @@
+## v1.14
+
+- Launch `avahi-daemon` with the `--no-drop-root` option to retain root capabilities, allowing the daemon to correctly identify and ignore its own loopback multicast packets and resolve hostname conflicts in host network mode
+
 ## v1.13
 
 - Switch network interface detection to a whitelist approach (`eth*`, `en*`, `wl*`, `wlan*`) to automatically exclude virtual interfaces (like `supervisor`)
