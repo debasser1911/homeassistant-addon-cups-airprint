@@ -1,3 +1,7 @@
+## v1.15
+
+- Add `--debug` flag to `avahi-daemon` startup to print verbose conflict logs for further analysis
+
 ## v1.14
 
 - Launch `avahi-daemon` with the `--no-drop-root` option to retain root capabilities, allowing the daemon to correctly identify and ignore its own loopback multicast packets and resolve hostname conflicts in host network mode

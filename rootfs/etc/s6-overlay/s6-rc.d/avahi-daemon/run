@@ -34,4 +34,4 @@ else
   bashio::log.warning "No physical network interfaces detected for Avahi!"
 fi
 
-exec avahi-daemon --no-drop-root
+exec avahi-daemon --no-drop-root --debug
