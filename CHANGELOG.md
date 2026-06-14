@@ -1,3 +1,9 @@
+## v1.13
+
+- Switch network interface detection to a whitelist approach (`eth*`, `en*`, `wl*`, `wlan*`) to automatically exclude virtual interfaces (like `supervisor`)
+- Disable the Avahi daemon reflector option to prevent loopbacks
+- Explicitly disable cross-family IPv4/IPv6 advertisements (`publish-aaaa-on-ipv4=no`, `publish-a-on-ipv6=no`) to avoid race conditions and false conflicts
+
 ## v1.12
 
 - Replace obsolete `cups-pdf` package with `printer-driver-cups-pdf` for compatibility with Debian Trixie (Debian 13) base image

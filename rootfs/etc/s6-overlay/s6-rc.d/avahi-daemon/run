@@ -8,20 +8,20 @@ until [ -e /run/dbus/system_bus_socket ]; do
   sleep 1s
 done
 
-# Detect interfaces to allow (excluding loopback and Docker virtual interfaces)
+# Detect physical interfaces to allow (whitelist eth*, en*, wl*, wlan*)
 allow_list=""
 for dev in /sys/class/net/*; do
   if [ -d "$dev" ]; then
     name=$(basename "$dev")
     case "$name" in
-      veth*|docker*|hassio*|lo|br-*)
-        ;;
-      *)
+      eth*|en*|wl*|wlan*)
         if [ -n "$allow_list" ]; then
           allow_list="$allow_list,$name"
         else
           allow_list="$name"
         fi
+        ;;
+      *)
         ;;
     esac
   fi
