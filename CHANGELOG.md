@@ -1,3 +1,14 @@
+## v1.19
+
+- Fix "Password Required" prompts on iOS and macOS devices for AirPrint printers by splitting `Send-Document` and `Send-URI` from authenticated operations into a separate, unauthenticated policy block in `cupsd.conf`
+- Enable `ServerAlias *` in `cupsd.conf` to accept requests from any IP address or hostname
+- Disable TLS/SSL encryption requirements for simplified local network setups with `DefaultEncryption Never` in `cupsd.conf`
+- Add startup scripting to dynamically patch existing CUPS configurations in `/config/cups/cupsd.conf` so upgrading users benefit from the AirPrint compatibility fixes
+
+## v1.18
+
+- Remove `--debug` flag from `avahi-daemon` execution to clean up verbose discarded-packet warnings from the logs
+
 ## v1.17
 
 - Install `iproute2` package to make the `ip` command available in the container
