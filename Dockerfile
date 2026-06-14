@@ -1,7 +1,7 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-LABEL io.hass.version="1.11" io.hass.type="addon" io.hass.arch="aarch64|amd64"
+LABEL io.hass.version="1.12" io.hass.type="addon" io.hass.arch="aarch64|amd64"
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -28,7 +28,7 @@ RUN apt update \
         printer-driver-foo2zjs \
         printer-driver-hpcups \
         printer-driver-escpr \
-        cups-pdf \
+        printer-driver-cups-pdf \
         gnupg2 \
         lsb-release \
         nano \

@@ -1,3 +1,7 @@
+## v1.12
+
+- Replace obsolete `cups-pdf` package with `printer-driver-cups-pdf` for compatibility with Debian Trixie (Debian 13) base image
+
 ## v1.11
 
 - Fix Windows carriage returns (CRLF) and execution permissions on S6 overlay daemon scripts to ensure they start and run correctly in the Docker container
